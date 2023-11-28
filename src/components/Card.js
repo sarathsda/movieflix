@@ -30,3 +30,5 @@ const Card = ({result}) => {
 }
 
 export default Card
+
+
