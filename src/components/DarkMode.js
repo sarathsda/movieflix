@@ -9,7 +9,7 @@ const DarkMode = () => {
     const { systemTheme,theme,setTheme} = useTheme();
     const [ mount,setMount] = useState(false);
     const currenttheme = theme === "system" ? systemTheme:theme
-    useEffect(()=>setMount((true),[]))
+    useEffect(()=>{setMount(true)},[])
   return (
   <>
     {mount && currenttheme === "dark" ? <MdLightMode onClick={()=>setTheme('light')} className='text-xl cursor-pointer hover:text-amber-500'/> 
