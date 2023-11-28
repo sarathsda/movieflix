@@ -9,7 +9,7 @@ const Card = ({result}) => {
     sm:shadow-md rounded-lg sm:border sm:border-slate-400 group sm:m-2 transition-shadow duration-200'>
       <Link href={`/movie/${result.id}`}>
         <Image 
-        src={`https://image.tmdb.org/t/p/original/${result.backdrop_path || result.poster.path}`}
+        src={`https://image.tmdb.org/t/p/original/${result.backdrop_path || result.poster_path}`}
         width={500}
         height={300}
         alt="movie image"
