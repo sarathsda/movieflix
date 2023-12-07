@@ -40,8 +40,22 @@ const Header = () => {
   };
 
   const handleSortChange = (e) => {
-    setSortingOption(e.target.value);
-    // Implement your sorting logic here
+    const selectedOption = e.target.value;
+    setSortingOption(selectedOption);
+    const sortedResults = [...searchResults];
+
+    if (selectedOption === "popularity") {
+      // Implement sorting logic based on popularity
+      sortedResults.sort((a, b) => b.popularity - a.popularity);
+    } else if (selectedOption === "release_date") {
+      // Implement sorting logic based on release date
+      sortedResults.sort((a, b) => {
+        const dateA = new Date(a.release_date || a.first_air_date);
+        const dateB = new Date(b.release_date || b.first_air_date);
+        return dateB - dateA;
+      });
+    }
+
     console.log("Sorting by:", e.target.value);
   };
 
