@@ -17,7 +17,7 @@ const Header = () => {
       // Fetch movie search results from TMDb API
       const fetchSearchResults = async () => {
         try {
-          const apiKey = "f0a67b258aea1c9ea1b2aebe90af5bb8";
+          const apiKey = "API_KEY";
           const response = await fetch(
             `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}`
           );
