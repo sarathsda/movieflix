@@ -39,10 +39,39 @@ const Header = () => {
     console.log("Searching for:", searchQuery);
   };
 
-  const handleSortChange = (e) => {
+  const handleSortChange = async (e) => {
     const selectedOption = e.target.value;
     setSortingOption(selectedOption);
-    const sortedResults = [...searchResults];
+
+    try {
+      const apiKey = "API_KEY";
+      const apiEndpoint = getApiEndpoint(selectedOption);
+      const response = await fetch(
+        `https://api.themoviedb.org/3/${apiEndpoint}?api_key=${apiKey}&query=${searchQuery}`
+      );
+      const data = await response.json();
+      // Sort the searchResults based on the selected option
+      const sortedResults = sortResults(data.results, selectedOption);
+      setSearchResults(sortedResults);
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+    }
+  };
+
+  const getApiEndpoint = (selectedOption) => {
+    if (selectedOption === "popularity") {
+      return "search/movie";
+    } else if (selectedOption === "top_rated") {
+      return "movie/top_rated";
+    } else if (selectedOption === "release_date") {
+      return "search/movie";
+    }
+  };
+
+
+    // Helper function to sort results based on the selected option
+  const sortResults = (results, selectedOption) => {
+    const sortedResults = [...results];
 
     if (selectedOption === "popularity") {
       // Implement sorting logic based on popularity
@@ -56,7 +85,7 @@ const Header = () => {
       });
     }
 
-    console.log("Sorting by:", e.target.value);
+    return sortedResults;
   };
 
   return (
