@@ -44,10 +44,10 @@ const Header = () => {
     try {
       const apiKey = "API_KEY";
       const apiEndpoint = getApiEndpoint(selectedOption);
-      const response = await fetch(
+      const response = fetch(
         `https://api.themoviedb.org/3/${apiEndpoint}?api_key=${apiKey}&query=${searchQuery}`
       );
-      const data = await response.json();
+      const data = response.json();
       // Sort the searchResults based on the selected option
       const sortedResults = sortResults(data.results, selectedOption);
       setSearchResults(sortedResults);
