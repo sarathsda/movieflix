@@ -1,9 +1,11 @@
+"use client"
 import React, { useState, useEffect } from "react";
 import { AiFillHome, AiFillInfoCircle } from "react-icons/ai";
 import Link from "next/link";
 import MenuItem from "./MenuItem";
 import DarkMode from "./DarkMode";
 import Image from 'next/image'
+
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -15,7 +17,7 @@ const Header = () => {
       // Fetch movie search results from TMDb API
       const fetchSearchResults = async () => {
         try {
-          const apiKey = "API_KEY";
+          const apiKey = "f0a67b258aea1c9ea1b2aebe90af5bb8";
           const response = await fetch(
             `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}`
           );
@@ -38,51 +40,9 @@ const Header = () => {
   };
 
   const handleSortChange = (e) => {
-    const selectedOption = e.target.value;
-    setSortingOption(selectedOption);
-
-    try {
-      const apiKey = "API_KEY";
-      const apiEndpoint = getApiEndpoint(selectedOption);
-      const response = fetch(
-        `https://api.themoviedb.org/3/${apiEndpoint}?api_key=${apiKey}&query=${searchQuery}`
-      );
-      const data = response.json();
-      // Sort the searchResults based on the selected option
-      const sortedResults = sortResults(data.results, selectedOption);
-      setSearchResults(sortedResults);
-    } catch (error) {
-      console.error("Error fetching search results:", error);
-    }
-  };
-
-  const getApiEndpoint = (selectedOption) => {
-    if (selectedOption === "popularity") {
-      return "trending/all/week";
-    } else if (selectedOption === "top_rated") {
-      return "movie/top_rated";
-    } else if (selectedOption === "release_date") {
-      return "discover/movie";
-    }
-  };
-
-  // Helper function to sort results based on the selected option
-  const sortResults = (results, selectedOption) => {
-    const sortedResults = [...results];
-
-    if (selectedOption === "popularity") {
-      // Implement sorting logic based on popularity
-      sortedResults.sort((a, b) => b.popularity - a.popularity);
-    } else if (selectedOption === "release_date") {
-      // Implement sorting logic based on release date
-      sortedResults.sort((a, b) => {
-        const dateA = new Date(a.release_date || a.first_air_date);
-        const dateB = new Date(b.release_date || b.first_air_date);
-        return dateB - dateA;
-      });
-    }
-
-    return sortedResults;
+    setSortingOption(e.target.value);
+    // Implement your sorting logic here
+    console.log("Sorting by:", e.target.value);
   };
 
   return (
@@ -120,7 +80,6 @@ const Header = () => {
             className="border rounded-md p-2 ml-2"
           >
             <option value="popularity">Popularity</option>
-            <option value="top_rated">Top Rated</option>
             <option value="release_date">Release Date</option>
           </select>
 
@@ -158,6 +117,7 @@ const Header = () => {
         ))}
       </div>
     </>
+    
   );
 };
 export default Header;
