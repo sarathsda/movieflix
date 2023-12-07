@@ -37,7 +37,7 @@ const Header = () => {
     console.log("Searching for:", searchQuery);
   };
 
-  const handleSortChange = async (e) => {
+  const handleSortChange = (e) => {
     const selectedOption = e.target.value;
     setSortingOption(selectedOption);
 
