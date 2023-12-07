@@ -60,11 +60,11 @@ const Header = () => {
 
   const getApiEndpoint = (selectedOption) => {
     if (selectedOption === "popularity") {
-      return "search/trending";
+      return "search/trending/all/week";
     } else if (selectedOption === "top_rated") {
       return "movie/top_rated";
     } else if (selectedOption === "release_date") {
-      return "search/release-date";
+      return "discover/movie";
     }
   };
 
