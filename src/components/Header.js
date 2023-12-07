@@ -69,8 +69,6 @@ const Header = () => {
 
           {/* Sorting options */}
           <select
-            value={sortingOption}
-            onChange={handleSortChange}
             className="border rounded-md p-2 ml-2"
           >
             <option value="popularity">Popularity</option>
